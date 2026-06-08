@@ -1,18 +1,14 @@
-import sys
-import os
+from flask import Flask, jsonify, request, render_template
+import sys, os
 sys.path.insert(0, os.path.dirname(__file__))
-
 from calculadora import sumar, restar, multiplicar, dividir
-from flask import Flask, jsonify, request
 
-app = Flask(__name__)
+app = Flask(__name__, template_folder='templates')
 
 @app.route('/')
 def index():
-    return jsonify({
-        "mensaje": "API Calculadora funcionando",
-        "endpoints": ["/sumar", "/restar", "/multiplicar", "/dividir"]
-    })
+    return render_template('index.html')
+
 
 @app.route('/sumar')
 def route_sumar():

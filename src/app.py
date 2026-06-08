@@ -1,5 +1,9 @@
-from flask import Flask, jsonify, request
+import sys
+import os
+sys.path.insert(0, os.path.dirname(__file__))
+
 from calculadora import sumar, restar, multiplicar, dividir
+from flask import Flask, jsonify, request
 
 app = Flask(__name__)
 

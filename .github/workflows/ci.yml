@@ -1,0 +1,48 @@
+name: CI/CD Pipeline
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+
+  # JOB 1: Build y pruebas (entorno desarrollador/CI)
+  build-and-test:
+    name: Build y Pruebas Automatizadas
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Clonar repositorio
+        uses: actions/checkout@v3
+
+      - name: Configurar Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.11'
+
+      - name: Instalar dependencias (build local)
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+
+      - name: Ejecutar pruebas automatizadas
+        run: pytest tests/ -v
+
+  # JOB 2: Deploy (entorno de entrega)
+  deploy:
+    name: Despliegue en Entorno de Entrega
+    runs-on: ubuntu-latest
+    needs: build-and-test  # Solo se ejecuta si las pruebas pasan
+
+    steps:
+      - name: Clonar repositorio
+        uses: actions/checkout@v3
+
+      - name: Simular despliegue
+        run: |
+          echo "✅ Pruebas pasadas. Desplegando versión..."
+          echo "Versión: ${{ github.sha }}"
+          echo "Rama: ${{ github.ref_name }}"
+          echo "🚀 Despliegue exitoso en entorno de entrega."

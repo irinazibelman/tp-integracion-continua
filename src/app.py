@@ -1,7 +1,7 @@
 from flask import Flask, jsonify, request, render_template
 import sys, os
 sys.path.insert(0, os.path.dirname(__file__))
-from calculadora import sumar, restar, multiplicar, dividir
+from calculadora import sumar, restar, multiplicar, dividir, potencia 
 
 app = Flask(__name__, template_folder='templates')
 
@@ -36,6 +36,12 @@ def route_dividir():
         return jsonify({"operacion": "division", "a": a, "b": b, "resultado": dividir(a, b)})
     except ValueError as e:
         return jsonify({"error": str(e)}), 400
+
+@app.route('/potencia') 
+def route_potencia(): 
+    a = float(request.args.get('a', 0))
+    b = float(request.args.get('b', 0)) 
+    return jsonify({"operacion": "potencia", "base": a, "exponente": b, "resultado": potencia(a, b)}) 
 
 if __name__ == '__main__':
     app.run(debug=True)

@@ -2,7 +2,7 @@ import sys
 import os
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), '..', 'src'))
 
-from calculadora import sumar, restar, multiplicar, dividir
+from calculadora import sumar, restar, multiplicar, dividir, potencia 
 import pytest
 
 def test_sumar():
@@ -20,3 +20,8 @@ def test_dividir():
 def test_dividir_por_cero():
     with pytest.raises(ValueError):
         dividir(5, 0)
+        
+def test_potencia(): 
+    assert potencia(2, 3) == 8 
+    assert potencia(5, 0) == 1 
+    assert potencia(3, 2) == 9 

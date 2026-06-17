@@ -1,6 +1,6 @@
 # tp-integracion-continua 
 
-![CI/CD Pipeline](https://github.com/irinazibekman/tp-integracion-continua/actions/workflows/ci.yml/badge.svg)
+![CI/CD Pipeline](https://github.com/irinazibelman/tp-integracion-continua/actions/workflows/ci.yml/badge.svg?branch=main)
 
 Calculadora en Python con entorno de integración y entrega continua usando GitHub Actions.
 
